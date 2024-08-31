@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Short URL Generator</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -38,7 +39,7 @@
     }
 }
 #button {
-            width: 20%;
+            width: auto;
             padding: 10px;
             background-color: #4a90e2;
             color: white;
@@ -75,7 +76,7 @@
             text-align: center; 
         }
         #inputShortLink{
-            width: 40%;
+            width: auto;
             padding: 12px 20px;
             margin: 8px 0;
             border-radius: 4px;
