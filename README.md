@@ -6,6 +6,10 @@
 ### Version 1.0
 - Random short URL
 - Retrieve original URL from short URL
+### Version 1.1
+- Custom Alias Functionality
+- Checks for existing aliases
+  
   ### Frontend
   - HTML,CSS, little bit JS
   ### Backend
