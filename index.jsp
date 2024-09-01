@@ -72,6 +72,9 @@
             text-align: center;
             color: white;
         }
+        #toggleSwitch{
+            
+}
         ::placeholder {
             text-align: center; 
         }
@@ -86,6 +89,22 @@
             text-align: center;
             color: white;
         }
+        #inputAlias{
+            width: auto;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border-radius: 4px;
+             
+            background-color:  #2D2839;
+            border-color: white;
+            text-align: center;
+            color: white;
+        }
+        input[type="checkbox"]:focus {
+             outline: max(2px, 0.15em) solid currentColor;
+                outline-offset: max(2px, 0.15em);
+        }
+
         #dispLink{
             font-family: verdana;
             font-size: 20px;
@@ -112,7 +131,7 @@
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: #132232;
+  background-color: transparent;
   color: gray;
   text-align: center;
 }
@@ -124,33 +143,56 @@
                 alert('Copied to clipboard');
             });
         }
+          function toggleContent() {
+            var alias = document.getElementById("alias");
+            var toggleSwitch = document.getElementById("showAlias"); 
+            
+            if (toggleSwitch.checked) {
+                alias.style.display = "block"; 
+                document.getElementById("alias").required = true;
+            } else {
+                alias.style.display = "none"; 
+                document.getElementById("alias").required = false;
+            }
+        }
     </script>
 </head>
 <body>
+    
     <div id='genDiv'>
         <form method="post" action='generate.jsp'>
              <h1 style="font-family: verdana;font-size: 28px;text-align: center; color: violet">SHORTEN URL</h1>
             <input type='text' placeholder="Enter looooong URL here..." name='longLink' id="inputlongLink" required>
             <br>
+            <label style = "font-family: sans-serif; font-size: 18px; color: yellow"; font-weight: 10px;> Use Alias    
+                <input type="checkbox" id="showAlias" onclick="toggleContent()" checked>
+            </label>
+            <div id ="alias">
+                <label style = "font-family : verdana; font-size: 22px;color : white"> Enter Alias : <span style = "color : orange;">shortURL.com/</span> </label>
+                <input type='text' placeholder="Enter alias here..." name='alias' id="inputAlias"  >
+            </div>
             <button type='submit' id="button">Generate short link</button>
         </form>
 
       
-        <% 
+        <%  
             String smallURL = (String) request.getAttribute("smallURL");
             String longURL = (String) request.getAttribute("longURL");
-            if (smallURL != null) { 
+            String aliasPresent = (String) request.getAttribute("aliasPresent");
+            if (smallURL != null && aliasPresent == null ) { 
         %>
             <p id='dispLink'>Original Link: <%= longURL %></p>
             <p id='dispLink'>Generated Short Link: <span style="color:yellow;" id="shortURL"><%= smallURL %></span></p>
             <button onclick='copyText("shortURL")' id='copyBtn'>Copy URL</button>
-        <% } %>
+        <% } else if(aliasPresent != null){ %>
+                <h3 style='color:red; font-size:20px; font-family:consolas;'>ALIAS ALREADY EXISTS! Choose another one...</h3>
+        <% }%>
     </div>
 <!--==================================================================================== -->
     <div id='genDiv'>
         
         <form method="post" action='retrieve.jsp'>
-             <h1 style="font-family: verdana;font-size: 28px;text-align: center; color: violet">Retrieve Long URL</h1>
+             <h1 style="font-family: verdana;font-size: 28px;text-align: center; color: violet">RETRIEVE LONG URL</h1>
             <input type='text' placeholder="Enter short URL here..." name='shortLink' id="inputShortLink" required>
             <br>
             <button type='submit' id="button">Retrieve long URL</button>
@@ -167,10 +209,11 @@
             <h3 style='color:red; font-size:20px; font-family:consolas;'>NO URL FOUND!</h3>
         <% } %>
     </div>
-</body>
-<footer>
-    <label>Project done by ArmaanShoaib.</label>
-    <a href ="https://github.com/armaanshoaib" style="color: antiquewhite">GitHub</a>
+    <footer>
+        <label>Project done by ArmaanShoaib.</label>
+        <a href ="https://github.com/armaanshoaib" style="color: blueviolet">GitHub</a>
     
-</footer>
+    </footer>
+</body>
+
 </html>
