@@ -15,7 +15,6 @@
     String longLink = "";
 
     try {
-        // Assuming `con` is a valid Connection object
         String query = "SELECT longURL FROM allurls WHERE smallURL = ?";
         stmt = con.prepareStatement(query);
         stmt.setString(1, shortLink);
