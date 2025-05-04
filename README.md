@@ -1,6 +1,6 @@
 ## URL Shortener and Retriever
 
-### Deployed on [AWS EC2](http://43.204.82.67:8080/shortURL/)
+### Deployed on AWS EC2, [Click Here](http://3.108.168.139:8080/shortURL/)
    Note : Server may be down sometimes!
 ### Frontend
   - HTML,CSS, little bit JS
