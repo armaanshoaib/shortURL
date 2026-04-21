@@ -13,8 +13,8 @@
     String smallURL = "";
     
     if(alias == ""){
-         Class.forName("com.mysql.jdbc.Driver");
-        Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/urls","root","root");    
+         Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con=DriverManager.getConnection("jdbc:mysql://db:3306/urls","root","root");    
         PreparedStatement stmt;
         // random url generated
         for (int i = 0; i < 6; i++) {
@@ -23,6 +23,10 @@
         }
         smallURL = "https://shortURL.io/" + temp;
         try {
+	    String createTable = "CREATE TABLE IF NOT EXISTS allurls (longURL varchar(255), smallURL varchar(100))";
+            stmt = con.prepareStatement(createTable);
+            stmt = con.prepareStatement(createTable);
+            stmt.executeUpdate();
             String query = "INSERT INTO allurls (longURL, smallURL) VALUES (?, ?)";
             stmt = con.prepareStatement(query);
             stmt.setString(1, longURL);
@@ -39,11 +43,12 @@
         dispatcher.forward(request, response);
     }
     else{
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/urls","root","root");    
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con=DriverManager.getConnection("jdbc:mysql://db:3306/urls","root","root");    
         PreparedStatement stmt;
         // custom url to be generated with Alias
         smallURL = "https://shortURL.com/"+alias;
+        smallURL = smallURL.toLowerCase();
         try {
             String query = "select longURL from allurls where smallURL = ?";
             stmt = con.prepareStatement(query);
@@ -69,6 +74,10 @@
         else{
             smallURL = "https://shortURL.com/"+alias;
             try {
+		String createTable = "CREATE TABLE IF NOT EXISTS allurls (longURL varchar(255), smallURL varchar(100))";
+            	stmt = con.prepareStatement(createTable);
+            	stmt = con.prepareStatement(createTable);
+            	stmt.executeUpdate();
                 String query = "INSERT INTO allurls (longURL, smallURL) VALUES (?, ?)";
                 stmt = con.prepareStatement(query);
                 stmt.setString(1, longURL);

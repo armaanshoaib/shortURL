@@ -99,7 +99,11 @@
                 border-color: white;
                 text-align: center;
                 color: white;
-            }        
+            }
+            input[type="checkbox"]:focus {
+                outline: max(2px, 0.15em) solid currentColor;
+                outline-offset: max(2px, 0.15em);
+            }
 
             #dispLink{
                 font-family: verdana;
