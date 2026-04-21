@@ -10,15 +10,14 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - /home/armaan/github/shortURL/urldb:/var/lib/mysql
+      - sql-nv:/var/lib/mysql
 
   web:
-    build: ./web
-    image: urlimg:1.0
+    image: armaanshoaibas/shorturl-web:1.0
     ports:
       - "8080:8080"
     depends_on:
       - db
 
 volumes:
-  {}
+  sql-nv:
